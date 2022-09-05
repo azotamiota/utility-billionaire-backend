@@ -24,10 +24,7 @@ io.on('connection', (socket) => {
     socket.on('disconnect', () => {
         console.log(`User ${socket.id} disconnected`);
     })
-    // socket.on("send_message", (data) => {
-    //     console.log('data arrived, to be emitted: ', data);
-    //     io.emit('receive_message', data)
-    // })
+
 })
 
 const port = process.env.PORT || 3000
