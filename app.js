@@ -7,7 +7,7 @@ require('dotenv').config()
 app.use(cors())
 
 app.get('/', (reg, res) => {
-    res.json({message: 'Welcome to millionare chat app'})
+    res.json({message: 'Welcome to utilitiy billionare backend'})
 })
 
 const server = http.createServer(app)
