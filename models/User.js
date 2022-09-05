@@ -7,7 +7,7 @@ const UserSchema = new mongoose.Schema({
         maxLength: [20, 'username length can be max 20 characters'],
         trim: true 
     },
-    points: {
+    score: {
         type: Number,
         required: true
     }
