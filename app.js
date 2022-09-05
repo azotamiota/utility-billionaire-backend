@@ -17,9 +17,12 @@ app.get('/leaderboard', userController.fetchLeaderboard)
 
 const server = http.createServer(app)
 
+
+const url = 'https://utility-billionare.netlify.app/'
+// const url = 'http://192.168.0.14:5173/'
 const io = new Server(server, {
     cors: {
-        origin: "https://chat-simple.netlify.app",
+        origin: url,
         methods: ['GET', 'POST']
     }
 })
