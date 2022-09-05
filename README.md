@@ -14,6 +14,10 @@ Please note that you cannot use the app on your local machine as it needs enviro
 
 ## Routes
 
+### Deployed server URL
+
+- https://utility-billionaire.herokuapp.com
+
 ### GET requests
 
 - `/` - Welcome message
@@ -29,8 +33,8 @@ Please note that you cannot use the app on your local machine as it needs enviro
     },
     {
       "_id": "6315c5bbb0e97a8a5b846970",
-      "username": "john123",
-      "score": 967,
+      "username": "darren456",
+      "score": 67,
       "__v": 0
     }]
 }
