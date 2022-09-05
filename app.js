@@ -4,11 +4,16 @@ const cors = require('cors')
 const http = require('http')
 const {Server} = require('socket.io')
 require('dotenv').config()
-app.use(cors())
 
-app.get('/', (reg, res) => {
-    res.json({message: 'Welcome to utilitiy billionare backend'})
-})
+const userController = require('./controllers/user')
+
+
+app.use(cors())
+app.use(express.json())
+
+app.get('/', (reg, res) => {res.json({message: 'Welcome to utilitiy billionare backend'})})
+app.post('/results', userController.sendResults)
+app.get('/leaderboard', userController.fetchLeaderboard)
 
 const server = http.createServer(app)
 
@@ -27,6 +32,5 @@ io.on('connection', (socket) => {
 
 })
 
-const port = process.env.PORT || 3000
 
 module.exports = app;
