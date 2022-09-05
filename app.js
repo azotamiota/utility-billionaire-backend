@@ -18,8 +18,9 @@ app.get('/leaderboard', userController.fetchLeaderboard)
 const server = http.createServer(app)
 
 
-const url = 'https://utility-billionare.netlify.app/'
-// const url = 'http://192.168.0.14:5173/'
+// const url = 'https://utility-billionare.netlify.app'
+const url = 'http://192.168.0.14:5173/waiting'
+
 const io = new Server(server, {
     cors: {
         origin: url,
