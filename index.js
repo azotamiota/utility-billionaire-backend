@@ -54,6 +54,9 @@ io.on('connection', (socket) => {
         // socket.join(room)
         console.log('user: '+userData.username + ' joinig room ' + userData.room)
     })
+    socket.on('start_game', data => {
+        io.emit('begin')
+    })
 })
 
 const port = process.env.PORT || 5000
