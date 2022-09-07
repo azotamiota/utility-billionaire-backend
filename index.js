@@ -7,9 +7,22 @@ require('dotenv').config()
 const server = http.createServer(app)
 
 // const url = 'https://utility-billionare.netlify.app'
+<<<<<<< HEAD
 const url = 'http://192.168.0.14:5173'
 let players = []
 let questions = []
+=======
+const url = 'http://localhost:5173'
+let players = [ ]
+let questions = [
+// { room: '123',questions: []},
+// { room: 'rooom3',questions: []},
+// { room: 'asda',questions: []},
+// { room: 'ro3',questions: []},
+// { room: 'agend',questions: []},
+]
+
+>>>>>>> main
 const io = new Server(server, {
     cors: {
         origin: url,
@@ -25,21 +38,24 @@ io.on('connection', (socket) => {
     })
     socket.on("send_question", (data) => {
         console.log(data)
-        let flag = false
+        let checkIfTheRoomExits = false
         for(let question of questions){
             if(question.room == data.room) {
-                flag = true
+                checkIfTheRoomExits = true
             }
         }
-        if (!flag) questions.push(data)
+        if (!checkIfTheRoomExits) questions.push(data)
+        // if (flag) io.emit('room e')
     })
     socket.on('join_room', (userData) => {
+        socket.join(userData.room)
         let counter = 0
         for(let player of players) {
             if(player.room == userData.room) counter++
         }
         if (counter >=4) io.emit('joined', 'sorry, too many players')
         if(players.indexOf(userData) == -1){
+            //check if the player already exists
             players.push(userData)
             const newArray = questions.filter(function (el) {
                 return el.room == userData.room
@@ -49,12 +65,12 @@ io.on('connection', (socket) => {
                 player.room == userData.room ? playersArr.push(player) : false
             }
 
-            io.emit('joined', {players: playersArr, questions: newArray}) 
+            io.to(userData.room).emit('joined', {players: playersArr, questions: newArray}) 
         }
         // socket.join(room)
         console.log('user: '+userData.username + ' joinig room ' + userData.room)
     })
-    socket.on('start_game', data => {
+    socket.on('start_game', () => {
         io.emit('begin')
     })
 
