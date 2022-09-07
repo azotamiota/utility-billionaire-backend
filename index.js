@@ -57,6 +57,11 @@ io.on('connection', (socket) => {
     socket.on('start_game', data => {
         io.emit('begin')
     })
+
+    let counter = 0
+    socket.on('send_result', data => {
+        console.log('data in send_result: ', data);
+    })
 })
 
 const port = process.env.PORT || 5000
