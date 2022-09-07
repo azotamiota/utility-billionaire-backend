@@ -8,7 +8,6 @@ const sendResults = async (req, res) => {
 
         const isExistingUser = await User.findOne({username});
         if (isExistingUser) {
-            console.log('isExistingUser: ', isExistingUser)
             isExistingUser.score += score
             isExistingUser.save()
             res.status(201).json({username: isExistingUser.username, message: 'score updated', 'score added': score})

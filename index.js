@@ -16,6 +16,7 @@ let questions = [
 // { room: 'ro3',questions: []},
 // { room: 'agend',questions: []},
 ]
+
 const io = new Server(server, {
     cors: {
         origin: url,
