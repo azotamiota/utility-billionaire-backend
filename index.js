@@ -6,9 +6,10 @@ require('dotenv').config()
 
 const server = http.createServer(app)
 
-// const url = 'https://utility-billionare.netlify.app'
-const url = 'http://localhost:5173'
+const url = 'https://utility-billionare.netlify.app'
+// const url = 'http://localhost:5173'
 let players = []
+const finalResults = []
 let questions = [
 // { room: '123',questions: []},
 // { room: 'rooom3',questions: []},
@@ -69,7 +70,6 @@ io.on('connection', (socket) => {
     })
 
     let counter = 0
-    const finalResults = []
     
     socket.on('send_result', data => {
         if (data.currentPlayers.length > counter) {
