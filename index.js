@@ -8,7 +8,7 @@ const server = http.createServer(app)
 
 // const url = 'https://utility-billionare.netlify.app'
 const url = 'http://localhost:5173'
-let players = [ ]
+let players = []
 let questions = [
 // { room: '123',questions: []},
 // { room: 'rooom3',questions: []},
@@ -69,8 +69,21 @@ io.on('connection', (socket) => {
     })
 
     let counter = 0
+    const finalResults = []
+    
     socket.on('send_result', data => {
+        if (data.currentPlayers.length > counter) {
+            counter++;
+            finalResults.push({id: counter, username: data.username, score: data.currentMoney})
+            console.log('finalResults until the counter is less than players: ', finalResults)
+        } else {
+            console.log('these final results are sent: ', finalResults)
+        }
         console.log('data in send_result: ', data);
+    })
+    
+    socket.on('page_loaded', () => {
+        io.emit('final_scores', finalResults)
     })
 })
 
