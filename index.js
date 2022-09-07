@@ -7,11 +7,6 @@ require('dotenv').config()
 const server = http.createServer(app)
 
 // const url = 'https://utility-billionare.netlify.app'
-<<<<<<< HEAD
-const url = 'http://192.168.0.14:5173'
-let players = []
-let questions = []
-=======
 const url = 'http://localhost:5173'
 let players = [ ]
 let questions = [
@@ -22,7 +17,6 @@ let questions = [
 // { room: 'agend',questions: []},
 ]
 
->>>>>>> main
 const io = new Server(server, {
     cors: {
         origin: url,
