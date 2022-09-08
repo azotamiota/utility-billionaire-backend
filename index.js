@@ -6,8 +6,8 @@ require('dotenv').config()
 
 const server = http.createServer(app)
 
-const url = 'https://utility-billionare.netlify.app'
-// const url = 'http://localhost:5173'
+// const url = 'https://utility-billionare.netlify.app'
+const url = 'http://localhost:5173'
 let players = []
 const finalResults = []
 let questions = [
@@ -62,11 +62,20 @@ io.on('connection', (socket) => {
 
             io.to(userData.room).emit('joined', {players: playersArr, questions: newArray}) 
         }
-        // socket.join(room)
-        console.log('user: '+userData.username + ' joinig room ' + userData.room)
+        setTimeout(() => {
+            socket.disconnect()
+            players = players.filter(player => {
+                console.log('player: ', player.room, player.username)
+                console.log('userData: ', userData.room, userData.username)
+                console.log(player.room != userData.room)
+                console.log(player.username != userData.username)
+                return player.room != userData.room && player.username != userData.username
+            });
+            console.log('players left after timeout', players)
+        }, 1800000)
     })
-    socket.on('start_game', () => {
-        io.emit('begin')
+    socket.on('start_game', (room) => {
+        io.to(room).emit('begin')
     })
 
     let counter = 0
@@ -82,8 +91,8 @@ io.on('connection', (socket) => {
         console.log('data in send_result: ', data);
     })
     
-    socket.on('page_loaded', () => {
-        io.emit('final_scores', finalResults)
+    socket.on('page_loaded', (room) => {
+        io.to(room).emit('final_scores', finalResults)
     })
 })
 
