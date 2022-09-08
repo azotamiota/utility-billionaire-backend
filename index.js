@@ -6,8 +6,8 @@ require('dotenv').config()
 
 const server = http.createServer(app)
 
-// const url = 'https://utility-billionare.netlify.app'
-const url = 'http://localhost:5173'
+const url = 'https://utility-billionare.netlify.app'
+// const url = 'http://localhost:5173'
 let players = []
 const finalResults = []
 let questions = [
