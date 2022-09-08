@@ -65,10 +65,10 @@ io.on('connection', (socket) => {
         setTimeout(() => {
             socket.disconnect()
             players = players.filter(player => {
-                console.log('player: ', player.room, player.username)
-                console.log('userData: ', userData.room, userData.username)
-                console.log(player.room != userData.room)
-                console.log(player.username != userData.username)
+                // console.log('player: ', player.room, player.username)
+                // console.log('userData: ', userData.room, userData.username)
+                // console.log(player.room != userData.room)
+                // console.log(player.username != userData.username)
                 return player.room != userData.room && player.username != userData.username
             });
             console.log('players left after timeout', players)
@@ -84,11 +84,11 @@ io.on('connection', (socket) => {
         if (data.currentPlayers.length > counter) {
             counter++;
             finalResults.push({id: counter, username: data.username, score: data.currentMoney})
-            console.log('finalResults until the counter is less than players: ', finalResults)
+            // console.log('finalResults until the counter is less than players: ', finalResults)
         } else {
-            console.log('these final results are sent: ', finalResults)
+            // console.log('these final results are sent: ', finalResults)
         }
-        console.log('data in send_result: ', data);
+        // console.log('data in send_result: ', data);
     })
     
     socket.on('page_loaded', (room) => {
@@ -98,14 +98,16 @@ io.on('connection', (socket) => {
 
 const port = process.env.PORT || 5000
 
-const startDatabaseAndServer = async () => {
+server.listen(port, () => {
+    console.log(`Server is listening to port ${port}...`)
+})
+
+const connectDatabase = async () => {
     
         await connectDB(process.env.MONGO_URI)
             .then(() => console.log('Connected to database...'))
-            .then(server.listen(port))
-            .then(() => console.log(`Server is listening to port ${port}...`))
             .catch(error => console.log('Can\'t connect to db or server: ', error))
             
 }
 
-startDatabaseAndServer()
+connectDatabase()
