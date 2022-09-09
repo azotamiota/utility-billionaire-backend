@@ -62,7 +62,8 @@ Please note that you cannot use the app on your local machine as it needs enviro
 
 - Deployed to [Heroku](https://heroku.com)
 - Database stored at [MongoDB Atlas](https://www.mongodb.com/atlas/database)
+- Socket.io dataflow
 
 ### Challenges
 
-- Nothing so far
+- Implement socket.io and make it work properly
